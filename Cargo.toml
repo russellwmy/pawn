@@ -1,0 +1,64 @@
+[workspace.package]
+version = "0.0.0"                                 # managed by cargo-workspaces, see below
+authors = ["Russell Wong"]
+edition = "2021"
+rust-version = "1.82.0"
+homepage = "https://github.com/russellwmy/pawn"
+repository = "https://github.com/russellwmy/pawn"
+license = "MIT"
+
+[workspace.metadata.workspaces]
+version = "0.20.1"
+exclude = []
+
+[workspace]
+resolver = "2"
+members = ["crates/pawn-runtime", "cli", "crates/pawn-square"]
+exclude = []
+
+[workspace.lints.clippy]
+all = { level = "allow", priority = -100 }
+correctness = { level = "deny", priority = -50 }
+suspicious = { level = "deny", priority = -50 }
+perf = { level = "deny", priority = -50 }
+# overrides clippy::perf = "deny": https://github.com/rust-lang/rust-clippy/issues/8111
+single_char_pattern = "allow"
+clone_on_copy = "deny"
+derivable_impls = "deny"
+redundant_clone = "deny"
+len_zero = "deny"
+or_fun_call = "deny"
+unnecessary_lazy_evaluations = "deny"
+
+[workspace.lints.rust]
+# Will take effect since Rust 1.80, produces unused warning before it: https://github.com/rust-lang/cargo/pull/13913
+unexpected_cfgs = { level = "allow", check-cfg = ['cfg(enable_const_type_id)'] }
+
+[workspace.dependencies]
+anyhow = "1.0"
+lazy_static = "1.5"
+thiserror = "2.0"
+wasmtime = "27.0"
+
+[profile.dev]
+panic = 'abort'
+
+[profile.release]
+overflow-checks = true
+panic = 'abort'
+lto = "fat"
+codegen-units = 1
+
+# A much faster to compile version of `release`, for development use.
+[profile.dev-release]
+inherits = "release"
+lto = false
+codegen-units = 16
+debug-assertions = true
+
+# Used for fuzzing, LTO is ill-supported as of 2023-09 and so should not be enabled.
+[profile.fuzz]
+inherits = "dev"
+opt-level = 3
+incremental = false
+codegen-units = 1

@@ -1,0 +1,31 @@
+(module
+  ;; Import the `env` functions for input and output
+  (import "env" "input" (func $input (param i32 i32))) ;; Takes a pointer and size
+  (import "env" "console_log" (func $console_log (param i32))) ;; Takes a pointer to a null-terminated string
+
+  ;; Define and export memory
+  (memory (export "memory") 1) ;; 1 memory page = 64 KiB
+
+  ;; Export a function to handle input and print it
+  (func (export "process_input")
+    (local $buffer_ptr i32) ;; Local variable for buffer pointer
+    (local $buffer_size i32) ;; Local variable for buffer size
+
+    ;; Allocate buffer at offset 0 in memory
+    (i32.const 0)
+    (local.set $buffer_ptr)
+
+    ;; Define buffer size (e.g., 32 bytes)
+    (i32.const 32)
+    (local.set $buffer_size)
+
+    ;; Call the `input` function with buffer pointer and size
+    (local.get $buffer_ptr)
+    (local.get $buffer_size)
+    (call $input)
+
+    ;; Call the `console_log` function with the buffer pointer
+    (local.get $buffer_ptr)
+    (call $console_log)
+  )
+)

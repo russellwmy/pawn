@@ -1,0 +1,11 @@
+{
+    "files.eol": "\n",
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
+    "remote.extensionKind": {
+        "ms-azuretools.vscode-docker": "workspace"
+    }
+}
