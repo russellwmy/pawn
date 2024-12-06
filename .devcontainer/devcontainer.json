@@ -12,8 +12,17 @@
                 "ms-azuretools.vscode-docker",
                 "rust-lang.rust-analyzer",
                 "tamasfe.even-better-toml",
-                "DavidAnson.vscode-markdownlint"
+                "DavidAnson.vscode-markdownlint",
+                "fill-labs.dependi",
+                "bytecodealliance.wit-idl",
+                "DioxusLabs.dioxus"
             ]
         }
-    }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "latest"
+        }
+    },
+    "postCreateCommand": "./startup.sh"
 }

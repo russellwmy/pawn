@@ -1,0 +1,7 @@
+package pawn:chat@0.1.0;
+
+interface handler {
+    use types.{message};
+    handle: func(provider: string, model: string, apikey: string, messages: list<message>) -> message;
+}
+

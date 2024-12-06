@@ -1,0 +1,31 @@
+[package]
+name = "pawn-runtime"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+homepage.workspace = true
+repository.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+derive_builder = { workspace = true, features = ["alloc"] }
+hashbrown = { workspace = true }
+snafu = { workspace = true }
+tracing = { workspace = true }
+wasmtime = { workspace = true, features = [
+    "async",
+    "cache",
+    "component-model",
+    "coredump",
+    "cranelift",
+    "parallel-compilation",
+    "pooling-allocator",
+] }
+wasmtime-wasi = { workspace = true }
+wasmtime-wasi-http = { workspace = true }
+
+
+[lints]
+workspace = true

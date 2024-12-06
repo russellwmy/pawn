@@ -11,7 +11,8 @@ reorder_imports = true
 edition = "2021"
 
 # These options are only available in +nightly.
-# group_imports = "One"
-# imports_granularity = "One"
-# fn_args_density = "Compressed"
-# overflow_delimited_expr = "true"
+unstable_features = true
+group_imports = "StdExternalCrate"
+fn_args_density = "Compressed"
+imports_granularity = "Crate"
+overflow_delimited_expr = true

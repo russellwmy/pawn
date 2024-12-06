@@ -1,0 +1,38 @@
+[package]
+name = "concierge"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dioxus = { version = "0.6.0", features = ["router", "fullstack"] }
+reqwest = { workspace = true, features = ["json"] }
+pulldown-cmark = "0.13.0"
+serde = { workspace = true }
+toml = { workspace = true }
+
+# Server deps
+pawn-runtime = { workspace = true, optional = true }
+wasmtime = { workspace = true, features = ["component-model"], optional = true }
+
+
+[features]
+default = []
+web = ["dioxus/web"]
+desktop = ["dioxus/desktop"]
+mobile = ["dioxus/mobile"]
+server = ["dioxus/server", "dep:wasmtime", "dep:pawn-runtime"]
+
+[profile]
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.android-dev]
+inherits = "dev"

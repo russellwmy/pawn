@@ -28,3 +28,8 @@ Thumbs.db
 #.vscode/
 *.iml
 
+# Config file
+**/*/config.toml
+
+# Node package
+node_modules/

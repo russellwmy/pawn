@@ -1,0 +1,7 @@
+
+package pawn:chat@0.1.0;
+
+world chat {
+  import handler;
+  export handler;
+}

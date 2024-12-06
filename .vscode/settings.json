@@ -1,11 +1,17 @@
 {
-    "files.eol": "\n",
-    "editor.tabSize": 4,
+    "workbench.colorTheme": "Default Dark Modern",
     "editor.formatOnSave": true,
-    "[rust]": {
-        "editor.defaultFormatter": "rust-lang.rust-analyzer"
-    },
-    "remote.extensionKind": {
-        "ms-azuretools.vscode-docker": "workspace"
-    }
+    "editor.foldingImportsByDefault": false,
+    "editor.unfoldOnClickAfterEndOfLine": true,
+    "rust-analyzer.rustfmt.extraArgs": [
+        "+nightly" // Use nightly build for formatting
+    ],
+    "rust-analyzer.check.overrideCommand": [
+        "cargo",
+        "component",
+        "check",
+        "--workspace",
+        "--all-targets",
+        "--message-format=json"
+    ],
 }

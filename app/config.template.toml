@@ -1,0 +1,7 @@
+[chat]
+component_wasm_path = "../target/wasm32-wasip1/release/pawn_chat.wasm"
+component_handler = "pawn:chat/handler"
+component_handle_function = "handle"
+provider = "gemini"                                                    # Support gemini, openai
+api_key = "API_KEY"
+model = "gemini-2.0-flash"

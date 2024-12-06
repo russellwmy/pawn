@@ -1,0 +1,27 @@
+@import "tailwindcss" source(none);
+@source "./src/**/*.{rs,html,css}";
+@plugin "daisyui";
+
+.markdown h1 {
+    @apply text-3xl font-bold my-4;
+}
+
+.markdown h2 {
+    @apply text-2xl font-semibold my-4;
+}
+
+.markdown p {
+    @apply text-gray-200 my-2;
+}
+
+.markdown ul {
+    @apply list-disc pl-6;
+}
+
+.markdown li {
+    @apply pb-3;
+}
+
+.markdown pre {
+    @apply bg-gray-800 text-white p-4 rounded-lg overflow-auto;
+}

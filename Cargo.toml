@@ -1,5 +1,6 @@
 [workspace.package]
-version = "0.0.0"                                 # managed by cargo-workspaces, see below
+name = "pawn"
+version = "0.1.0"
 authors = ["Russell Wong"]
 edition = "2021"
 rust-version = "1.82.0"
@@ -13,7 +14,13 @@ exclude = []
 
 [workspace]
 resolver = "2"
-members = ["crates/pawn-runtime", "cli", "crates/pawn-square"]
+members = [
+    "app",
+    "crates/runtime",
+    "crates/chat",
+    "crates/cloud-ai",
+    "crates/patches/wasi-http",
+]
 exclude = []
 
 [workspace.lints.clippy]
@@ -34,11 +41,6 @@ unnecessary_lazy_evaluations = "deny"
 # Will take effect since Rust 1.80, produces unused warning before it: https://github.com/rust-lang/cargo/pull/13913
 unexpected_cfgs = { level = "allow", check-cfg = ['cfg(enable_const_type_id)'] }
 
-[workspace.dependencies]
-anyhow = "1.0"
-lazy_static = "1.5"
-thiserror = "2.0"
-wasmtime = "27.0"
 
 [profile.dev]
 panic = 'abort'
@@ -62,3 +64,54 @@ inherits = "dev"
 opt-level = 3
 incremental = false
 codegen-units = 1
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.android-dev]
+inherits = "dev"
+
+[workspace.dependencies]
+cloud-ai = { path = "crates/cloud-ai" }
+pawn-runtime = { path = "crates/runtime" }
+wasmtime-wasi-http = { path = "crates/patches/wasi-http" }
+
+anyhow = { version = "1.0", default-features = false }
+async-trait = { version = "0.1", default-features = false }
+base64 = { version = "0.22", default-features = false }
+bytes = { version = "1.10", default-features = false }
+chrono = { version = "0.4", default-features = false }
+derive_builder = { version = "0.20", default-features = false }
+futures = { version = "0.3", default-features = false }
+hashbrown = { version = "0.15", default-features = false }
+http = { version = "1.2", default-features = false }
+http-body = { version = "1.0", default-features = false }
+http-body-util = { version = "0.1", default-features = false }
+hyper = { version = "1.5", default-features = false }
+id-arena = { version = "2.2.1", default-features = false }
+libc = { version = "0.2", default-features = false }
+opentelemetry = { version = "0.27", default-features = false }
+rand = { version = "0.9", default-features = false }
+reqwest = { version = "0.12", default-features = false }
+rusqlite = { version = "0.33", default-features = false }
+serde = { version = "1.0", default-features = false }
+serde_json = { version = "1.0", default-features = false }
+sha2 = { version = "0.10", default-features = false }
+snafu = { version = "0.8" }
+tokio = { version = "1.43", default-features = false }
+toml = { version = "0.8", default-features = false }
+tracing = { version = "0.1", default-features = false }
+tracing-subscriber = { version = "0.3", default-features = false }
+uuid = { version = "1.12", default-features = false }
+url = { version = "2.5", default-features = false }
+wasmparser = { version = "0.227.0", default-features = false }
+wasmtime = { version = "30.0", default-features = false }
+wasmtime-wasi = { version = "30.0", default-features = false }
+wit-bindgen-rt = { version = "0.39", default-features = false }
+wit-parser = { version = "0.227", default-features = false }
+wit-component = { version = "0.227", default-features = false }
+wstd = { version = "0.5", default-features = false }
